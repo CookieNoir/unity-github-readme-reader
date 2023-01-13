@@ -1,4 +1,3 @@
-using System;
 using System.Globalization;
 using Octokit;
 using UnityEngine;
@@ -6,6 +5,7 @@ using TMPro;
 
 public class RepositoryDrawer : MonoBehaviour
 {
+    [SerializeField] private GameObject _targetGameObject;
     [SerializeField] private TMP_Text _nameTextField;
     [SerializeField] private GameObject[] _descriptionGameObjects;
     [SerializeField] private TMP_Text _descriptionTextField;
@@ -14,7 +14,12 @@ public class RepositoryDrawer : MonoBehaviour
     [SerializeField] private TMP_Text _licenseTextField;
     [SerializeField] private TMP_Text _lastUpdateTextField;
 
-    public void Draw(Repository repository)
+    public void Hide()
+    {
+        _targetGameObject.SetActive(false);
+    }
+
+    public void Draw(Repository repository, bool hasReadme)
     {
         _nameTextField.text = repository.Name;
 
@@ -27,13 +32,9 @@ public class RepositoryDrawer : MonoBehaviour
         if (hasLicense) _licenseTextField.text = repository.License.Name;
 
         _lastUpdateTextField.text = $"Updated on {repository.UpdatedAt.Date.ToString("MMM dd, yyyy", CultureInfo.InvariantCulture)}";
-
-        _ShowReadmeButton(repository.FullName, repository.DefaultBranch);
-    }
-
-    private async void _ShowReadmeButton(string fullName, string defaultBranch)
-    {
-        bool hasReadme = await ReadmeChecker.ExistsAsync(fullName, defaultBranch);
+        
         GameObjectHelper.SetActive(_readmeButtonGameObjects, hasReadme);
+
+        _targetGameObject.SetActive(true);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +26,7 @@ public class ColorChanger : MonoBehaviour
             _defaultColorIndex = -1;
             return;
         }
-        if (_defaultColorIndex < 0) _defaultColorIndex = 0;
-        if (_defaultColorIndex >= _colors.Length) _defaultColorIndex = _colors.Length - 1;
+        _defaultColorIndex = Math.Clamp(_defaultColorIndex, 0, _colors.Length - 1);
+        if (_maskableGraphic) _maskableGraphic.color = _colors[_defaultColorIndex];
     }
 }

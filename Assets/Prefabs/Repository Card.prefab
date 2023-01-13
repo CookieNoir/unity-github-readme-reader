@@ -169,7 +169,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1479, y: 20}
+  m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2397828494690556164
 GameObject:
@@ -207,7 +207,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1479, y: 2}
+  m_SizeDelta: {x: 0, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2397828494690556161
 CanvasRenderer:
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
+  m_ChildControlWidth: 1
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
@@ -371,6 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 671cfda00fd979d4290a4ef0ac1bb8f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetGameObject: {fileID: 2397828494766840934}
   _nameTextField: {fileID: 2397828495550909121}
   _descriptionGameObjects:
   - {fileID: 8853295744100503669}
@@ -416,7 +417,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1479, y: 15}
+  m_SizeDelta: {x: 0, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2397828495520801672
 GameObject:
@@ -454,8 +455,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 730, y: 0}
-  m_SizeDelta: {x: 1460, y: 0}
+  m_AnchoredPosition: {x: 739.5, y: 0}
+  m_SizeDelta: {x: 1479, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2397828495520801396
 CanvasRenderer:
@@ -485,9 +486,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla
-    odio tempor velit suscipit dapibus. Cras maximus, odio id mattis aliquam, nibh
-    odio fringilla sapien, fermentum venenatis elit ligula ut metus.
+  m_text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sollicitudin,
+    felis non sollicitudin sagittis, sapien purus pulvinar mauris, in vulputate mi
+    lacus id nibh.\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 317b70059487e7e4597508287dfb0c02, type: 2}
   m_sharedMaterial: {fileID: 6529016398311810904, guid: 317b70059487e7e4597508287dfb0c02, type: 2}
@@ -987,7 +988,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1479, y: 12}
+  m_SizeDelta: {x: 0, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6299761722507987717
 GameObject:
@@ -1289,7 +1290,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1479, y: 10}
+  m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9152421508398309410
 GameObject:

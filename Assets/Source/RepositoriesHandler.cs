@@ -8,6 +8,8 @@ public class RepositoriesHandler : MonoBehaviour
     [SerializeField] private Transform _prefabParent;
     [SerializeField] private ReadmeReceiver _readmeReceiver;
     [SerializeField] private ManagedLayoutRebuilder _layoutRebuilder;
+    [SerializeField] private RepositoryCardFilter _repositoryCardFilter;
+    private List<RepositoryCard> _repositoryCards = new List<RepositoryCard>();
 
     public void CreateCards(IEnumerable<Repository> repositories)
     {
@@ -17,13 +19,20 @@ public class RepositoriesHandler : MonoBehaviour
             GameObject newGameObject = Instantiate(_repositoryCardPrefab, _prefabParent);
             newGameObject.name = repository.Name;
             RepositoryCard repositoryCard = newGameObject.GetComponent<RepositoryCard>();
-            repositoryCard.SetData(repository, _readmeReceiver.SetRepositoryIdAndReceive);
+            _repositoryCards.Add(repositoryCard);
+            repositoryCard.SetData(repository, _readmeReceiver.SetRepositoryIdAndReceive, ApplyFilters);
         }
         _layoutRebuilder.Rebuild();
     }
 
+    public void ApplyFilters()
+    {
+        _repositoryCardFilter?.ApplyFilters(_repositoryCards);
+    }
+
     private void _Clear()
     {
+        _repositoryCards.Clear();
         foreach (Transform child in _prefabParent) Destroy(child.gameObject);
     }
 }
