@@ -2,11 +2,10 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public static class ReadmeChecker
+public static class UrlChecker
 {
-    public static async Task<bool> ExistsAsync(string fullName, string defaultBranch)
+    public static async Task<bool> ExistsAsync(string url)
     {
-        string url = $"https://github.com/{fullName}/blob/{defaultBranch}/README.md";
         UnityWebRequest www = UnityWebRequest.Head(url);
         www.timeout = 5;
         var operation = www.SendWebRequest();
@@ -15,7 +14,7 @@ public static class ReadmeChecker
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogWarning($"{www.error}, URL:{www.url}");
+            // Debug.LogWarning($"{www.error}, URL:{www.url}");
             return false;
         }
         return true;

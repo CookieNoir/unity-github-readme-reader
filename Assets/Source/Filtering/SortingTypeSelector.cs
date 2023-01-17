@@ -1,31 +1,31 @@
-using UnityEngine;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-public class SortingTypeSelector : MonoBehaviour
+public class SortingTypeSelector : FilterSelector<RepositoryCard>
 {
-    [SerializeField] private Switcher _switcher;
-    private int _sortingType;
-
-    public void UpdateValue()
+    private Func<RepositoryCard, object> _GetKeySelector()
     {
-        _sortingType = _switcher.CurrentValue;
-    }
-
-    public object Sort(RepositoryCard repositoryCard)
-    {
-        switch (_sortingType)
+        switch (Value)
         {
             case 0:
                 {
-                    return repositoryCard.Repository.Name;
+                    return x => x.Repository.Name;
                 }
             case 1:
                 {
-                    return repositoryCard.Repository.UpdatedAt;
+                    return x => x.Repository.UpdatedAt;
                 }
             default:
                 {
-                    return null;
+                    return x => x;
                 }
         }
+    }
+
+    public override IEnumerable<RepositoryCard> ApplyFilter(IEnumerable<RepositoryCard> collection)
+    {
+        Func<RepositoryCard, object> keySelector = _GetKeySelector();
+        return collection.OrderBy(keySelector);
     }
 }

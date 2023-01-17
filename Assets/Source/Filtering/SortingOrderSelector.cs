@@ -1,20 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
-public class SortingOrderSelector : MonoBehaviour
+public class SortingOrderSelector : FilterSelector<RepositoryCard>
 {
-    [SerializeField] private Switcher _switcher;
-    private bool _acsending;
-
-    public void UpdateValue()
+    public override IEnumerable<RepositoryCard> ApplyFilter(IEnumerable<RepositoryCard> collection)
     {
-        _acsending = _switcher.CurrentValue > 0;
-    }
-
-    public IEnumerable<T> Order<T>(IEnumerable<T> collection)
-    {
-        if (_acsending) return collection;
+        if (Value > 0) return collection;
         else return collection.Reverse();
     }
 }
