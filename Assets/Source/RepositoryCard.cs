@@ -1,15 +1,14 @@
 using System;
-using Octokit;
 using UnityEngine;
 
 public class RepositoryCard : MonoBehaviour
 {
-    [SerializeField] private RepositoryDrawer _repositoryDrawer;
-    public Repository Repository { get; private set; }
+    [SerializeField] private RepositoryDataDrawer _repositoryDrawer;
+    public RepositoryData Repository { get; private set; }
     public bool HasReadme { get; private set; }
     private string _readmeUrl;
 
-    public async void SetData(Repository repository, Action onDataSet)
+    public async void SetData(RepositoryData repository, Action onDataSet)
     {
         _repositoryDrawer.Hide();
         Repository = repository;

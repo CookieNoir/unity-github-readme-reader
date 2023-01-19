@@ -1,8 +1,7 @@
-using Octokit;
 using UnityEngine;
 using TMPro;
 
-public class UserDrawer : MonoBehaviour
+public class UserDataDrawer : MonoBehaviour
 {
     [SerializeField] private TextureRepository _textureRepository;
     [SerializeField] private AsyncImageTextureSetter _asyncImageTextureSetter;
@@ -15,7 +14,7 @@ public class UserDrawer : MonoBehaviour
     [SerializeField] private TMP_Text _blogTextField;
     [SerializeField] private ManagedLayoutRebuilder _layoutRebuilder;
 
-    public void Draw(User user)
+    public void Draw(UserData user)
     {
         _asyncImageTextureSetter.SetTexture(user.AvatarUrl, _textureRepository);
 

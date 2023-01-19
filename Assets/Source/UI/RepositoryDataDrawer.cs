@@ -1,9 +1,8 @@
 using System.Globalization;
-using Octokit;
 using UnityEngine;
 using TMPro;
 
-public class RepositoryDrawer : MonoBehaviour
+public class RepositoryDataDrawer : MonoBehaviour
 {
     [SerializeField] private GameObject _targetGameObject;
     [SerializeField] private TMP_Text _nameTextField;
@@ -19,7 +18,7 @@ public class RepositoryDrawer : MonoBehaviour
         _targetGameObject.SetActive(false);
     }
 
-    public void Draw(Repository repository, bool hasReadme)
+    public void Draw(RepositoryData repository, bool hasReadme)
     {
         _nameTextField.text = repository.Name;
 
@@ -27,9 +26,9 @@ public class RepositoryDrawer : MonoBehaviour
         GameObjectHelper.SetActive(_descriptionGameObjects, hasDescription);
         if (hasDescription) _descriptionTextField.text = repository.Description;
 
-        bool hasLicense = repository.License != null;
+        bool hasLicense = StringHelper.IsFilled(repository.LicenseName);
         _licenseGameObject.SetActive(hasLicense);
-        if (hasLicense) _licenseTextField.text = repository.License.Name;
+        if (hasLicense) _licenseTextField.text = repository.LicenseName;
 
         _lastUpdateTextField.text = $"Updated on {repository.UpdatedAt.Date.ToString("MMM dd, yyyy", CultureInfo.InvariantCulture)}";
         

@@ -3673,6 +3673,7 @@ GameObject:
   - component: {fileID: 1019473328}
   - component: {fileID: 1019473327}
   - component: {fileID: 1019473326}
+  - component: {fileID: 1019473329}
   m_Layer: 5
   m_Name: Username Input Field
   m_TagString: Untagged
@@ -3763,30 +3764,6 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1557255868}
-        m_TargetAssemblyTypeName: UserReceiver, Assembly-CSharp
-        m_MethodName: SetUsername
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1143191617}
-        m_TargetAssemblyTypeName: RepositoriesReceiver, Assembly-CSharp
-        m_MethodName: SetUsername
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1232249941}
         m_TargetAssemblyTypeName: ColorChanger, Assembly-CSharp
         m_MethodName: SetColor
@@ -3885,6 +3862,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1019473324}
   m_CullTransparentMesh: 1
+--- !u!114 &1019473329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019473324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f31eeb1a7458d6440bec8f44b8faae53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inputField: {fileID: 1019473326}
+  OnValueReceived:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1557255868}
+        m_TargetAssemblyTypeName: DataReceiver`2[[System.String, mscorlib
+        m_MethodName: RequestAndSendData
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1143191617}
+        m_TargetAssemblyTypeName: DataReceiver`2[[System.String, mscorlib
+        m_MethodName: RequestAndSendData
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1110056045
 GameObject:
   m_ObjectHideFlags: 0
@@ -4110,7 +4127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0af9fb897883e47b1dd5f24ec56577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  githubReader: {fileID: 2012190656}
+  _githubReaderHolder: {fileID: 2012190658}
   OnDataReceived:
     m_PersistentCalls:
       m_Calls:
@@ -4138,6 +4155,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnFailure:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1143191618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5325,7 +5345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c8f6c14742cc24fa9c575a6cec3a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  githubReader: {fileID: 2012190656}
+  _githubReaderHolder: {fileID: 2012190658}
   OnDataReceived:
     m_PersistentCalls:
       m_Calls:
@@ -5353,6 +5373,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnFailure:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1614657804
 GameObject:
   m_ObjectHideFlags: 0
@@ -6309,7 +6332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2012190657}
-  - component: {fileID: 2012190656}
+  - component: {fileID: 2012190658}
   m_Layer: 0
   m_Name: Github Reader
   m_TagString: Untagged
@@ -6317,19 +6340,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2012190656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2012190655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81caa29eaf714124ba4ce7c8fe21db01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _productHeaderValue: unity-github-readme-reader
 --- !u!4 &2012190657
 Transform:
   m_ObjectHideFlags: 0
@@ -6345,6 +6355,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2012190658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012190655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 466c7d1f08905a2438209715cbe817cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _githubReaderInstancer: {fileID: 11400000, guid: d99475d78d88f764da0d8d9644ebfc87, type: 2}
 --- !u!1 &2027866377
 GameObject:
   m_ObjectHideFlags: 0
@@ -6752,22 +6775,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1557255868}
-        m_TargetAssemblyTypeName: DataReceiver`1[[Octokit.User, Octokit
-        m_MethodName: ReceiveAndTransfer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1143191617}
-        m_TargetAssemblyTypeName: DataReceiver`1[[System.Collections.Generic.IEnumerable`1[[Octokit.Repository,
-          Octokit
-        m_MethodName: ReceiveAndTransfer
+      - m_Target: {fileID: 1019473329}
+        m_TargetAssemblyTypeName: InputFieldTextDistributor, Assembly-CSharp
+        m_MethodName: Distribute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

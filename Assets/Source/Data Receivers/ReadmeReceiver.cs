@@ -1,18 +1,9 @@
-using Octokit;
-using System.Threading.Tasks;
+using System;
 
-public class ReadmeReceiver : DataReceiver<Readme>
+public class ReadmeReceiver : DataReceiver<long, string>
 {
-    private long _repositoryId;
-
-    public void SetRepositoryIdAndReceive(long repositoryId)
+    protected override Action<long, Action<string>, Action<string>> GetRequestMethod()
     {
-        _repositoryId = repositoryId;
-        ReceiveAndTransfer();
-    }
-
-    protected override async Task<Readme> Receive()
-    {
-        return await githubReader.GetReadme(_repositoryId);
+        return GithubReader.RequestRepositoryReadme;
     }
 }

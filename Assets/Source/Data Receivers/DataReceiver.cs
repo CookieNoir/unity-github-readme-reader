@@ -1,17 +1,19 @@
-using System.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class DataReceiver<T> : MonoBehaviour
+public abstract class DataReceiver<IT, OT> : MonoBehaviour
 {
-    [SerializeField] protected GithubReader githubReader;
-    public UnityEvent<T> OnDataReceived;
+    [SerializeField] private GithubReaderHolder _githubReaderHolder;
+    public UnityEvent<OT> OnDataReceived;
+    public UnityEvent<string> OnFailure;
+    protected IGithubReader GithubReader { get => _githubReaderHolder.GithubReader; }
 
-    protected abstract Task<T> Receive();
+    protected abstract Action<IT, Action<OT>, Action<string>> GetRequestMethod();
 
-    public async void ReceiveAndTransfer()
+    public void RequestAndSendData(IT inputData)
     {
-        T data = await Receive();
-        if (data != null) OnDataReceived.Invoke(data);
+        var requestMethod = GetRequestMethod();
+        requestMethod(inputData, s => OnDataReceived.Invoke(s), f => OnFailure.Invoke(f));
     }
 }

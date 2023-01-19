@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Octokit;
 using UnityEngine;
 
 public class RepositoriesHandler : MonoBehaviour
@@ -10,10 +9,10 @@ public class RepositoriesHandler : MonoBehaviour
     [SerializeField] private RepositoryCardFilter _repositoryCardFilter;
     private List<RepositoryCard> _repositoryCards = new List<RepositoryCard>();
 
-    public void CreateCards(IEnumerable<Repository> repositories)
+    public void CreateCards(IEnumerable<RepositoryData> repositories)
     {
         _Clear();
-        foreach (Repository repository in repositories)
+        foreach (RepositoryData repository in repositories)
         {
             GameObject newGameObject = Instantiate(_repositoryCardPrefab, _prefabParent);
             newGameObject.name = repository.Name;
