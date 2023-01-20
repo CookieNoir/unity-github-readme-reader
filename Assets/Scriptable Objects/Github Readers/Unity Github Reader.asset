@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eedf623341be3dc439b747c354a9ae99, type: 3}
   m_Name: Unity Github Reader
   m_EditorClassIdentifier: 
+  _jsonReceiverPrefab: {fileID: 7331787770363543891, guid: 026c9268c6b8c1046ac7befd92f9be7b, type: 3}

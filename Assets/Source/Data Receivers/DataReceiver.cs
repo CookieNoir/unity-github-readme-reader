@@ -13,7 +13,12 @@ public abstract class DataReceiver<IT, OT> : MonoBehaviour
 
     public void RequestAndSendData(IT inputData)
     {
+        RequestAndSendData(inputData, s => OnDataReceived.Invoke(s), f => OnFailure.Invoke(f));
+    }
+
+    public void RequestAndSendData(IT inputData, Action<OT> onSuccessAction, Action<string> onFailureAction)
+    {
         var requestMethod = GetRequestMethod();
-        requestMethod(inputData, s => OnDataReceived.Invoke(s), f => OnFailure.Invoke(f));
+        requestMethod(inputData, onSuccessAction, onFailureAction);
     }
 }

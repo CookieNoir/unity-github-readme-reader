@@ -3028,6 +3028,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
+--- !u!1 &592887584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 592887586}
+  - component: {fileID: 592887585}
+  m_Layer: 0
+  m_Name: Log Viewer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &592887585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592887584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2309a763154942347a1aef97894d1d07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &592887586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592887584}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &601866082
 GameObject:
   m_ObjectHideFlags: 0
@@ -4157,7 +4201,19 @@ MonoBehaviour:
         m_CallState: 2
   OnFailure:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 592887585}
+        m_TargetAssemblyTypeName: LogShower, Assembly-CSharp
+        m_MethodName: ShowWarning
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1143191618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4172,6 +4228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _repositoryCardPrefab: {fileID: 2397828494766840934, guid: 95fc6e5b1e2eb7d43b364936c8a58a0a, type: 3}
   _prefabParent: {fileID: 131810994}
+  _readmeReceiver: {fileID: 1496195622}
   _layoutRebuilder: {fileID: 131810997}
   _repositoryCardFilter: {fileID: 685842019}
 --- !u!1 &1170519773
@@ -5187,6 +5244,69 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1496195621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1496195623}
+  - component: {fileID: 1496195622}
+  m_Layer: 0
+  m_Name: Readme Receiver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1496195622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496195621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4fa2d62b5a7764298db6e127fbf71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _githubReaderHolder: {fileID: 2012190658}
+  OnDataReceived:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFailure:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 592887585}
+        m_TargetAssemblyTypeName: LogViewer, Assembly-CSharp
+        m_MethodName: ShowWarning
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &1496195623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496195621}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1531458510
 GameObject:
   m_ObjectHideFlags: 0
@@ -5375,7 +5495,19 @@ MonoBehaviour:
         m_CallState: 2
   OnFailure:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 592887585}
+        m_TargetAssemblyTypeName: LogShower, Assembly-CSharp
+        m_MethodName: ShowWarning
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1614657804
 GameObject:
   m_ObjectHideFlags: 0
@@ -6367,7 +6499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 466c7d1f08905a2438209715cbe817cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _githubReaderInstancer: {fileID: 11400000, guid: d99475d78d88f764da0d8d9644ebfc87, type: 2}
+  _githubReaderInstancer: {fileID: 11400000, guid: da33884e5a532b441b76e14d4d8305f3, type: 2}
 --- !u!1 &2027866377
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class UserDataDrawer : MonoBehaviour
     [SerializeField] private TMP_Text _blogTextField;
     [SerializeField] private ManagedLayoutRebuilder _layoutRebuilder;
 
-    public void Draw(UserData user)
+    public void Draw(GithubUser user)
     {
         _asyncImageTextureSetter.SetTexture(user.AvatarUrl, _textureRepository);
 

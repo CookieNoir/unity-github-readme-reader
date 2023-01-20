@@ -5,20 +5,21 @@ public class RepositoriesHandler : MonoBehaviour
 {
     [SerializeField] private GameObject _repositoryCardPrefab;
     [SerializeField] private Transform _prefabParent;
+    [SerializeField] private ReadmeReceiver _readmeReceiver;
     [SerializeField] private ManagedLayoutRebuilder _layoutRebuilder;
     [SerializeField] private RepositoryCardFilter _repositoryCardFilter;
     private List<RepositoryCard> _repositoryCards = new List<RepositoryCard>();
 
-    public void CreateCards(IEnumerable<RepositoryData> repositories)
+    public void CreateCards(IEnumerable<GithubRepository> repositories)
     {
         _Clear();
-        foreach (RepositoryData repository in repositories)
+        foreach (GithubRepository repository in repositories)
         {
             GameObject newGameObject = Instantiate(_repositoryCardPrefab, _prefabParent);
             newGameObject.name = repository.Name;
             RepositoryCard repositoryCard = newGameObject.GetComponent<RepositoryCard>();
             _repositoryCards.Add(repositoryCard);
-            repositoryCard.SetData(repository, ApplyFilters);
+            repositoryCard.SetData(repository, _readmeReceiver, ApplyFilters);
         }
     }
 

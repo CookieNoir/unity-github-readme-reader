@@ -18,7 +18,7 @@ public class RepositoryDataDrawer : MonoBehaviour
         _targetGameObject.SetActive(false);
     }
 
-    public void Draw(RepositoryData repository, bool hasReadme)
+    public void Draw(GithubRepository repository, bool hasReadme)
     {
         _nameTextField.text = repository.Name;
 

@@ -1,8 +1,8 @@
 using System;
 
-public class ReadmeReceiver : DataReceiver<long, string>
+public class ReadmeReceiver : DataReceiver<string, GithubReadme>
 {
-    protected override Action<long, Action<string>, Action<string>> GetRequestMethod()
+    protected override Action<string, Action<GithubReadme>, Action<string>> GetRequestMethod()
     {
         return GithubReader.RequestRepositoryReadme;
     }

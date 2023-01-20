@@ -1,8 +1,8 @@
 using System;
 
-public class UserDataReceiver : DataReceiver<string, UserData>
+public class UserDataReceiver : DataReceiver<string, GithubUser>
 {
-    protected override Action<string, Action<UserData>, Action<string>> GetRequestMethod()
+    protected override Action<string, Action<GithubUser>, Action<string>> GetRequestMethod()
     {
         return GithubReader.RequestUserData;
     }

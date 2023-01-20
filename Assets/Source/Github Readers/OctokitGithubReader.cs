@@ -11,12 +11,16 @@ public class OctokitGithubReader : IGithubReader
         _client = new GitHubClient(new ProductHeaderValue(productHeaderValue));
     }
 
-    public async void RequestRepositoryReadme(long repositoryId, Action<string> onSuccessAction, Action<string> onFailureAction = null)
+    public async void RequestRepositoryReadme(string repositoryFullName, Action<GithubReadme> onSuccessAction, Action<string> onFailureAction = null)
     {
         try
         {
-            var readme = await _client.Repository.Content.GetReadme(repositoryId);
-            onSuccessAction(readme.Content);
+            int slash = repositoryFullName.IndexOf('/');
+            string owner = repositoryFullName[0..slash];
+            string repositoryName = repositoryFullName[(slash + 1)..(repositoryFullName.Length)];
+            var readme = await _client.Repository.Content.GetReadme(owner, repositoryName);
+            GithubReadme githubReadme = new GithubReadme(readme.HtmlUrl, readme.Content);
+            onSuccessAction(githubReadme);
         }
         catch (Exception ex)
         {
@@ -24,12 +28,12 @@ public class OctokitGithubReader : IGithubReader
         }
     }
 
-    public async void RequestUserData(string username, Action<UserData> onSuccessAction = null, Action<string> onFailureAction = null)
+    public async void RequestUserData(string username, Action<GithubUser> onSuccessAction, Action<string> onFailureAction = null)
     {
         try
         {
             var user = await _client.User.Get(username);
-            UserData userData = new UserData(user.Id, user.AvatarUrl, user.Name, user.Login, user.Bio, user.Blog, user.Url);
+            GithubUser userData = new GithubUser(user.Id, user.AvatarUrl, user.Name, user.Login, user.Bio, user.Blog, user.Url);
             onSuccessAction(userData);
         }
         catch (Exception ex)
@@ -38,15 +42,15 @@ public class OctokitGithubReader : IGithubReader
         }
     }
 
-    public async void RequestUserRepositoriesData(string username, Action<IEnumerable<RepositoryData>> onSuccessAction, Action<string> onFailureAction = null)
+    public async void RequestUserRepositoriesData(string username, Action<IEnumerable<GithubRepository>> onSuccessAction, Action<string> onFailureAction = null)
     {
         try
         {
             var repositoryList = await _client.Repository.GetAllForUser(username);
-            List<RepositoryData> resultRepositories = new List<RepositoryData>();
+            List<GithubRepository> resultRepositories = new List<GithubRepository>();
             foreach (var repository in repositoryList)
             {
-                resultRepositories.Add(new RepositoryData(
+                resultRepositories.Add(new GithubRepository(
                     repository.Id,
                     repository.Name,
                     repository.FullName,
@@ -54,6 +58,7 @@ public class OctokitGithubReader : IGithubReader
                     repository.DefaultBranch,
                     repository.License != null ? repository.License.Name : null,
                     repository.UpdatedAt.Date,
+                    repository.Url,
                     repository.SvnUrl));
             }
             onSuccessAction(resultRepositories);

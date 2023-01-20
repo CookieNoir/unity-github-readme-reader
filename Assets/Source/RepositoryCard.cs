@@ -4,24 +4,41 @@ using UnityEngine;
 public class RepositoryCard : MonoBehaviour
 {
     [SerializeField] private RepositoryDataDrawer _repositoryDrawer;
-    public RepositoryData Repository { get; private set; }
+    public GithubRepository Repository { get; private set; }
+    public GithubReadme GithubReadme { get; private set; }
     public bool HasReadme { get; private set; }
-    private string _readmeUrl;
+    private Action _onDataSet;
 
-    public async void SetData(RepositoryData repository, Action onDataSet)
+    public void SetData(GithubRepository repository, ReadmeReceiver readmeReceiver, Action onDataSet)
     {
         _repositoryDrawer.Hide();
         Repository = repository;
-        string url = $"https://github.com/{Repository.FullName}/blob/{Repository.DefaultBranch}/README.md";
-        HasReadme = await UrlChecker.ExistsAsync(url);
-        _repositoryDrawer.Draw(repository, HasReadme);
-        if (HasReadme) _readmeUrl = url;
-        onDataSet();
+        _onDataSet = onDataSet;
+        readmeReceiver.RequestAndSendData(Repository.FullName, _OnReadmeReceived, _OnReadmeNotReceived);
+    }
+
+    private void _OnReadmeReceived(GithubReadme readme)
+    {
+        GithubReadme = readme;
+        HasReadme = GithubReadme != null;
+        _DrawData();
+    }
+
+    private void _OnReadmeNotReceived(string message)
+    {
+        HasReadme = false;
+        _DrawData();
+    }
+
+    private void _DrawData()
+    {
+        _repositoryDrawer.Draw(Repository, HasReadme);
+        _onDataSet();
     }
 
     public void OpenReadme()
     {
-        UrlOpener.OpenURL(_readmeUrl);
+        if (HasReadme) UrlOpener.OpenURL(GithubReadme.HtmlUrl);
     }
 
     public void OpenSvnUrl()

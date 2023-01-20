@@ -1,4 +1,4 @@
-# Github repositories shower
+# Github repositories viewer
 Web app for fast reading repositories info. Made with [Unity](https://unity.com/ru) & [Octokit](https://github.com/octokit/octokit.net).
 
 You can browse all open repositories of any user and move to their default branches and README files with a single click.
