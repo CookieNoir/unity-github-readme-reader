@@ -4,10 +4,10 @@ public class UnityGithubReaderInstancer : GithubReaderInstancer
 {
     [SerializeField] private GameObject _jsonReceiverPrefab;
 
-    public override IGithubReader GetInstance()
+    public override IGithubReader GetInstance(string accessToken = null)
     {
         GameObject jsonReceiverObject = Instantiate(_jsonReceiverPrefab);
         JSONReceiver receiver = jsonReceiverObject.GetComponent<JSONReceiver>();
-        return new UnityGithubReader(receiver);
+        return new UnityGithubReader(receiver, accessToken);
     }
 }

@@ -6,9 +6,10 @@ public class OctokitGithubReader : IGithubReader
 {
     private GitHubClient _client;
 
-    public OctokitGithubReader(string productHeaderValue)
+    public OctokitGithubReader(string productHeaderValue, string accessToken = null)
     {
         _client = new GitHubClient(new ProductHeaderValue(productHeaderValue));
+        if (StringHelper.IsFilled(accessToken)) _client.Credentials = new Credentials(accessToken);
     }
 
     public async void RequestRepositoryReadme(string repositoryFullName, Action<GithubReadme> onSuccessAction, Action<string> onFailureAction = null)

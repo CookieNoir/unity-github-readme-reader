@@ -4,8 +4,8 @@ public class OctokitGithubReaderInstancer : GithubReaderInstancer
 {
     [SerializeField] private string _productHeaderValue;
 
-    public override IGithubReader GetInstance()
+    public override IGithubReader GetInstance(string accessToken = null)
     {
-        return new OctokitGithubReader(_productHeaderValue);
+        return new OctokitGithubReader(_productHeaderValue, accessToken);
     }
 }

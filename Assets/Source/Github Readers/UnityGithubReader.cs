@@ -8,11 +8,11 @@ public class UnityGithubReader : IGithubReader
 {
     private JSONReceiver _jsonReceiver;
 
-    public UnityGithubReader(JSONReceiver jsonReceiver)
+    public UnityGithubReader(JSONReceiver jsonReceiver, string accessToken = null)
     {
         string userAgentValue = $"{Application.productName}/{Application.version}";
         _jsonReceiver = jsonReceiver;
-        _jsonReceiver.Set(userAgentValue);
+        _jsonReceiver.Set(userAgentValue, accessToken);
     }
 
     public void RequestUserData(string username, Action<GithubUser> onSuccessAction, Action<string> onFailureAction = null)
