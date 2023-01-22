@@ -8,6 +8,6 @@ public class GithubReaderHolder : MonoBehaviour
 
     private void Awake()
     {
-        GithubReader = _githubReaderInstancer.GetInstance();
+        GithubReader = _githubReaderInstancer.GetInstance(_accessToken);
     }
 }
