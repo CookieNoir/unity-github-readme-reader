@@ -6,6 +6,6 @@ public class GithubReadme
         Content = content;
     }
 
-    public string HtmlUrl;
-    public string Content;
+    public string HtmlUrl { get; private set; }
+    public string Content { get; private set; }
 }

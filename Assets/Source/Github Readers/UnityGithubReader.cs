@@ -34,8 +34,8 @@ public class UnityGithubReader : IGithubReader
             string bio = root.GetProperty("bio").ToString();
             string blog = root.GetProperty("blog").ToString();
             string url = root.GetProperty("url").ToString();
-
-            GithubUser userData = new GithubUser(id, avatarUrl, name, login, bio, blog, url);
+            int publicRepos = root.GetProperty("public_repos").GetInt32();
+            GithubUser userData = new GithubUser(id, avatarUrl, name, login, bio, blog, url, publicRepos);
             onSuccessAction(userData);
         }
         catch (Exception ex)
@@ -44,9 +44,9 @@ public class UnityGithubReader : IGithubReader
         }
     }
 
-    public void RequestUserRepositoriesData(string username, Action<IEnumerable<GithubRepository>> onSuccessAction, Action<string> onFailureAction = null)
+    public void RequestUserRepositoriesData(GithubUser user, Action<IEnumerable<GithubRepository>> onSuccessAction, Action<string> onFailureAction = null)
     {
-        string url = $"https://api.github.com/users/{username}/repos";
+        string url = $"https://api.github.com/users/{user.Login}/repos?per_page={user.PublicRepos}";
         _jsonReceiver.TryToGetJson(url, _OnRepositoryDataReceived, onSuccessAction, onFailureAction);
     }
 
@@ -74,7 +74,15 @@ public class UnityGithubReader : IGithubReader
                 DateTime updatedAt = element.GetProperty("updated_at").GetDateTime();
                 string url = element.GetProperty("url").ToString();
                 string svnUrl = element.GetProperty("svn_url").ToString();
-                GithubRepository repositoryData = new GithubRepository(id, name, fullName, description, defaultBranch, licenseName, updatedAt, url, svnUrl);
+
+                List<string> topics = new List<string>();
+                JsonElement topicsElement = element.GetProperty("topics");
+                if (topicsElement.ValueKind != JsonValueKind.Null)
+                {
+                    foreach (JsonElement topic in topicsElement.EnumerateArray())
+                        topics.Add(topic.ToString());
+                }
+                GithubRepository repositoryData = new GithubRepository(id, name, fullName, description, defaultBranch, licenseName, updatedAt, url, svnUrl, topics);
                 repositories.Add(repositoryData);
             }
             onSuccessAction(repositories);

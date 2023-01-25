@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 
 public class GithubRepository
 {
-    public GithubRepository(long id, string name, string fullName, string description, string defaultBranch, string licenseName, DateTime updatedAt, string url, string svnUrl)
+    public GithubRepository(long id, string name, string fullName, string description, string defaultBranch, string licenseName, DateTime updatedAt, string url, string svnUrl, IEnumerable<string> topics)
     {
         Id = id;
         Name = name;
@@ -13,15 +14,17 @@ public class GithubRepository
         UpdatedAt = updatedAt;
         Url = url;
         SvnUrl = svnUrl;
+        Topics = topics;
     }
 
-    public long Id;
-    public string Name;
-    public string FullName;
-    public string Description;
-    public string DefaultBranch;
-    public string LicenseName;
-    public DateTime UpdatedAt;
-    public string Url;
-    public string SvnUrl;
+    public long Id { get; private set; }
+    public string Name { get; private set; }
+    public string FullName { get; private set; }
+    public string Description { get; private set; }
+    public string DefaultBranch { get; private set; }
+    public string LicenseName { get; private set; }
+    public DateTime UpdatedAt { get; private set; }
+    public string Url { get; private set; }
+    public string SvnUrl { get; private set; }
+    public IEnumerable<string> Topics { get; private set; }
 }

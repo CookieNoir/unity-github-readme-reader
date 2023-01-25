@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-public class RepositoriesReceiver : DataReceiver<string, IEnumerable<GithubRepository>>
+public class RepositoriesReceiver : DataReceiver<GithubUser, IEnumerable<GithubRepository>>
 {
-    protected override Action<string, Action<IEnumerable<GithubRepository>>, Action<string>> GetRequestMethod()
+    protected override Action<GithubUser, Action<IEnumerable<GithubRepository>>, Action<string>> GetRequestMethod()
     {
         return GithubReader.RequestUserRepositoriesData;
     }

@@ -1,6 +1,6 @@
 public class GithubUser
 {
-    public GithubUser(int id, string avatarUrl, string name, string login, string bio, string blog, string url)
+    public GithubUser(int id, string avatarUrl, string name, string login, string bio, string blog, string url, int publicRepos)
     {
         Id = id;
         AvatarUrl = avatarUrl;
@@ -9,13 +9,15 @@ public class GithubUser
         Bio = bio;
         Blog = blog;
         Url = url;
+        PublicRepos = publicRepos;
     }
 
-    public int Id { get; protected set; }
-    public string AvatarUrl { get; protected set; }
-    public string Name { get; protected set; }
-    public string Login { get; protected set; }
-    public string Bio { get; protected set; }
-    public string Blog { get; protected set; }
-    public string Url { get; protected set; }
+    public int Id { get; private set; }
+    public string AvatarUrl { get; private set; }
+    public string Name { get; private set; }
+    public string Login { get; private set; }
+    public string Bio { get; private set; }
+    public string Blog { get; private set; }
+    public string Url { get; private set; }
+    public int PublicRepos { get; private set; }
 }

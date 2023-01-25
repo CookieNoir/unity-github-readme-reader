@@ -34,7 +34,7 @@ public class OctokitGithubReader : IGithubReader
         try
         {
             var user = await _client.User.Get(username);
-            GithubUser userData = new GithubUser(user.Id, user.AvatarUrl, user.Name, user.Login, user.Bio, user.Blog, user.Url);
+            GithubUser userData = new GithubUser(user.Id, user.AvatarUrl, user.Name, user.Login, user.Bio, user.Blog, user.Url, user.PublicRepos);
             onSuccessAction(userData);
         }
         catch (Exception ex)
@@ -43,11 +43,11 @@ public class OctokitGithubReader : IGithubReader
         }
     }
 
-    public async void RequestUserRepositoriesData(string username, Action<IEnumerable<GithubRepository>> onSuccessAction, Action<string> onFailureAction = null)
+    public async void RequestUserRepositoriesData(GithubUser user, Action<IEnumerable<GithubRepository>> onSuccessAction, Action<string> onFailureAction = null)
     {
         try
         {
-            var repositoryList = await _client.Repository.GetAllForUser(username);
+            var repositoryList = await _client.Repository.GetAllForUser(user.Login, new ApiOptions() { PageSize = user.PublicRepos });
             List<GithubRepository> resultRepositories = new List<GithubRepository>();
             foreach (var repository in repositoryList)
             {
@@ -60,7 +60,8 @@ public class OctokitGithubReader : IGithubReader
                     repository.License != null ? repository.License.Name : null,
                     repository.UpdatedAt.Date,
                     repository.Url,
-                    repository.SvnUrl));
+                    repository.SvnUrl,
+                    repository.Topics));
             }
             onSuccessAction(resultRepositories);
         }
