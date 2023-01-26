@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using UnityEngine;
@@ -75,11 +76,13 @@ public class UnityGithubReader : IGithubReader
                 string url = element.GetProperty("url").ToString();
                 string svnUrl = element.GetProperty("svn_url").ToString();
 
-                List<string> topics = new List<string>();
+                List<string> topics = null;
                 JsonElement topicsElement = element.GetProperty("topics");
-                if (topicsElement.ValueKind != JsonValueKind.Null)
+                var enumeratedTopics = topicsElement.EnumerateArray();
+                if (enumeratedTopics.Any())
                 {
-                    foreach (JsonElement topic in topicsElement.EnumerateArray())
+                    topics = new List<string>();
+                    foreach (JsonElement topic in enumeratedTopics)
                         topics.Add(topic.ToString());
                 }
                 GithubRepository repositoryData = new GithubRepository(id, name, fullName, description, defaultBranch, licenseName, updatedAt, url, svnUrl, topics);
