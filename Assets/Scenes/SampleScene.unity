@@ -567,6 +567,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 184520206}
+  _prefix: 
+  _suffix: 
 --- !u!114 &184520204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3459,7 +3461,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 0
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 29637813}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 197957995}

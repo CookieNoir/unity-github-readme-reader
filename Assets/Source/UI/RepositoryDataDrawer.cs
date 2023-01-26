@@ -12,6 +12,8 @@ public class RepositoryDataDrawer : MonoBehaviour
     [SerializeField] private GameObject _licenseGameObject;
     [SerializeField] private TMP_Text _licenseTextField;
     [SerializeField] private TMP_Text _lastUpdateTextField;
+    [SerializeField] private GameObject[] _topicsGameObjects;
+    [SerializeField] private TopicsDrawer _topicsDrawer;
 
     public void Hide()
     {
@@ -33,6 +35,10 @@ public class RepositoryDataDrawer : MonoBehaviour
         _lastUpdateTextField.text = $"Updated on {repository.UpdatedAt.Date.ToString("MMM dd, yyyy", CultureInfo.InvariantCulture)}";
         
         GameObjectHelper.SetActive(_readmeButtonGameObjects, hasReadme);
+
+        bool hasTopics = repository.Topics != null;
+        GameObjectHelper.SetActive(_topicsGameObjects, hasTopics);
+        if (hasTopics) _topicsDrawer.Draw(repository.Topics);
 
         _targetGameObject.SetActive(true);
     }
